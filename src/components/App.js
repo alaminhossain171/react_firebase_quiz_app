@@ -1,10 +1,14 @@
-import React from 'react';
-
+import React from "react";
+import Home from "../pages/Home";
+import "../styles/Global.css";
+import Layout from "./Layout";
 const App = () => {
   return (
-    <div>
-      App js components
-    </div>
+    <>
+      <Layout>
+        <Home />
+      </Layout>
+    </>
   );
 };
 

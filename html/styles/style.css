@@ -124,6 +124,7 @@ h4 {
   margin: 2rem auto;
 }
 
+
 /* text input component */
 .textInput {
   width: 100%;
@@ -193,7 +194,7 @@ h4 {
   font-size: 12px;
 }
 
-.account > span:last-child {
+.account>span:last-child {
   cursor: pointer;
 }
 
