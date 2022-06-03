@@ -1,12 +1,14 @@
 import React from "react";
-import Home from "../pages/Home";
+import Login from "../pages/Login";
 import "../styles/Global.css";
 import Layout from "./Layout";
 const App = () => {
   return (
     <>
       <Layout>
-        <Home />
+        {/* <Home /> */}
+        {/* <Signup /> */}
+        <Login />
       </Layout>
     </>
   );
