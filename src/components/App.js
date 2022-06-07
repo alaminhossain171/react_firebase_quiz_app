@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "../pages/Login";
+import Result from "../pages/Result";
 import "../styles/Global.css";
 import Layout from "./Layout";
 const App = () => {
@@ -8,7 +8,9 @@ const App = () => {
       <Layout>
         {/* <Home /> */}
         {/* <Signup /> */}
-        <Login />
+        {/* <Login /> */}
+        {/* <Quiz /> */}
+        <Result />
       </Layout>
     </>
   );
