@@ -5,7 +5,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Answers from "../components/Answers";
 import MiniPlayer from "../components/MiniPlayer";
 import ProgressBar from "../components/ProgressBar";
-import { useAuth } from '../contexts/AuthContext.js';
+import { useAuth } from "../contexts/AuthContext.js";
 import useQuestionList from "../hooks/useQuestionList";
 const initialState = null;
 
@@ -37,6 +37,9 @@ export default function Quiz() {
   const [qna, dispatch] = useReducer(reducer, initialState);
   const { currentUser } = useAuth();
   const history = useHistory();
+  const { location } = history;
+  const { state } = location;
+  const { videoTitle } = state;
 
   useEffect(() => {
     dispatch({
@@ -69,26 +72,24 @@ export default function Quiz() {
   }
 
   // submit quiz
- // submit quiz
- async function submit() {
-  const { uid } = currentUser;
+  // submit quiz
+  async function submit() {
+    const { uid } = currentUser;
 
-  const db = getDatabase();
-  const resultRef = ref(db, `result/${uid}`);
+    const db = getDatabase();
+    const resultRef = ref(db, `result/${uid}`);
 
-  await set(resultRef, {
-    [id]: qna,
-  });
+    await set(resultRef, {
+      [id]: qna,
+    });
 
-  history.push({
-    pathname: `/result/${id}`,
-    state: {
-      qna,
-    },
-  });
-}
-
-
+    history.push({
+      pathname: `/result/${id}`,
+      state: {
+        qna,
+      },
+    });
+  }
 
   // calculate percentage of progress
   const percentage =
@@ -103,16 +104,17 @@ export default function Quiz() {
           <h1>{qna[currentQuestion].title}</h1>
           <h4>Question can have multiple answers</h4>
           <Answers
+          input
             options={qna[currentQuestion].options}
             handleChange={handleAnswerChange}
           />
           <ProgressBar
             next={nextQuestion}
             prev={prevQuestion}
-      submit={submit}
+            submit={submit}
             progress={percentage}
           />
-          <MiniPlayer />
+          <MiniPlayer id={id} titile={videoTitle} />
         </>
       )}
     </>

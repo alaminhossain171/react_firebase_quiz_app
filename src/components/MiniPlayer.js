@@ -1,18 +1,48 @@
-import React from "react";
-import image from "../assests/images/3.jpg";
-import Styles from "../styles/MiniPlayer.module.css";
-const MiniPlayer = () => {
+import { useRef, useState } from "react";
+import ReactPlayer from "react-player/youtube";
+import classes from "../styles/MiniPlayer.module.css";
+
+export default function MiniPlayer({ titile, id }) {
+ 
+  const buttonRef = useRef();
+  const [status, setStatus] = useState(false);
+  const videoUrl = `https://www.youtube.com/watch?v=${id}`;
+
+  function toggleMiniPlayer() {
+    if (!status) {
+      buttonRef.current.classList.remove(classes.floatingBtn);
+      setStatus(true);
+    } else {
+      buttonRef.current.classList.add(classes.floatingBtn);
+      setStatus(false);
+    }
+  }
   return (
-    <div className={`${Styles.miniPlayer} ${Styles.floatingBtn}`}>
-      <span className={`material-icons-outlined ${Styles.open}`}>
+    <div
+      className={`${classes.miniPlayer} ${classes.floatingBtn}`}
+      ref={buttonRef}
+      onClick={toggleMiniPlayer}
+    >
+      <span className={`material-icons-outlined ${classes.open}`}>
         {" "}
         play_circle_filled{" "}
       </span>
-      <span className={`material-icons-outlined ${Styles.close}`}> close </span>
-      <img src={image} alt="img" />
-      <p>#23 React Hooks Bangla - React useReducer hook Bangla</p>
+      <span
+        className={`material-icons-outlined ${classes.close}`}
+        onClick={toggleMiniPlayer}
+      >
+        {" "}
+        close{" "}
+      </span>
+      <ReactPlayer
+        className={classes.player}
+        url={videoUrl}
+        width="300px"
+        height="168px"
+        playing={status}
+        controls
+      />
+      <p>{titile}</p>
     </div>
   );
-};
-
-export default MiniPlayer;
+}

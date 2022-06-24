@@ -1,17 +1,13 @@
 import Answers from "../components/Answers";
 import Styles from "../styles/Question.module.css";
-const Question = () => {
-  return (
-    <div>
-      <div className={Styles.question}>
-        <div className={Styles.qtitle}>
-          <span className="material-icons-outlined"> help_outline </span>
-          Here goes the question from Learn with Sumit?
-        </div>
-        <Answers />
+export default function Question({ answers = [] }) {
+  return answers.map((answer, index) => (
+    <div className={Styles.question} key={index}>
+      <div className={Styles.qtitle}>
+        <span className="material-icons-outlined"> help_outline </span>
+        {answer.title}
       </div>
+      <Answers input={false} options={answer.options} />
     </div>
-  );
-};
-
-export default Question;
+  ));
+}
